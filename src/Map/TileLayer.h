@@ -6,7 +6,7 @@
 
 struct Tileset
 {
-    int First, LastID;
+    int FirstID, LastID;
     int RowCount, ColCount;
     int TileCount, TileSize;
     std::string Name, Source;
