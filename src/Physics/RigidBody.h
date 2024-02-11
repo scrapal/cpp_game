@@ -35,7 +35,7 @@ class RigidBody
         inline void ApplyFriction(Vector2D Fr) { m_Friction = Fr; }
         inline void UnSetFriction() { m_Friction = Vector2D(0, 0); }
         
-        //Getters
+        // Gettersp
         inline float GetMass() { return m_Mass; }
         inline Vector2D Position() { return m_Position; }
         inline Vector2D Velocity() { return m_Velocity; }
