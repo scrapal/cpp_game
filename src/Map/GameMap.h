@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 #include "Layer.h"
 
 class GameMap
@@ -9,7 +10,9 @@ class GameMap
         void Render() 
         {
             for (unsigned int i = 0; i < m_MapLayers.size(); i++)
+            {
                 m_MapLayers[i]->Render();
+            }
         }
 
         void Update() 

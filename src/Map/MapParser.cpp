@@ -1,16 +1,21 @@
 #include "MapParser.h"
-#include <iostream>
 #include <string>
+
+MapParser *MapParser::s_Instance = nullptr;
 
 bool MapParser::Load()
 {
-    return Parse("level1", "assets/maps/map.tmx");
+    return Parse("MAP", "assets/maps/map.tmx");
 }
 
 bool MapParser::Parse(std::string id, std::string source)
 {
     TiXmlDocument xml;
-    xml.LoadFile(source);
+    if (!xml.LoadFile(source))
+    {
+        std::cerr << "Failed to load map file" << std::endl;
+        return false;
+    }
 
     if(xml.Error())
     {
@@ -35,8 +40,8 @@ bool MapParser::Parse(std::string id, std::string source)
         }
     }
 
-    // Parse Layers
-    GameMap* gamemap = new GameMap();
+        // Parse Layers
+        GameMap *gamemap = new GameMap();
     for (TiXmlElement* e=root->FirstChildElement(); e != nullptr; e=e->NextSiblingElement())
     {
         if (e->Value() == std::string("layer"))
@@ -54,7 +59,7 @@ Tileset MapParser::ParseTileset(TiXmlElement *xmlTileset)
 {
     Tileset tileset;
     tileset.Name = xmlTileset->Attribute("name");
-    xmlTileset->Attribute("firstgrid", &tileset.FirstID);
+    xmlTileset->Attribute("firstgid", &tileset.FirstID);
 
     xmlTileset->Attribute("tilecount", &tileset.TileCount);
     tileset.LastID = (tileset.FirstID + tileset.TileCount) - 1;
@@ -87,9 +92,9 @@ TileLayer* MapParser::ParseTileLayer(TiXmlElement *xmlLayer, TilesetList tileset
 
     TileMap tilemap(rowcount, std::vector<int>(colcount, 0));
 
-    for (int row = 0; row == rowcount; row++)
+    for (int row = 0; row < rowcount; row++)
     {
-        for (int col = 0; col == colcount; col++)
+        for (int col = 0; col < colcount; col++)
         {
             std::getline(iss, id, ',');
             std::stringstream convertor(id);
@@ -103,12 +108,13 @@ TileLayer* MapParser::ParseTileLayer(TiXmlElement *xmlLayer, TilesetList tileset
     return new TileLayer(tilesize, rowcount, colcount, tilemap, tilesets);
 }
 
-MapParser::MapParser()
-{
-
-}
-
 void MapParser::Clean()
 {
+    std::map<std::string, GameMap *>::iterator it;
+    for (it = m_MapDict.begin(); it != m_MapDict.end(); it++)
+    {
+        it->second = nullptr;
+    }
 
+    m_MapDict.clear();
 }
