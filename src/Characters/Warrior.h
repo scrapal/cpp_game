@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Character.h"
-#include "Animation/Animation.h"
+#include "Animation/SpriteAnimation.h"
 #include "Physics/RigidBody.h"
 #include "Physics/Collider.h"
+#include "Physics/Vector2D.h"
 
 #define JUMP_TIME 15.0f
 #define JUMP_FORCE 10.0f
@@ -36,7 +37,7 @@ class Warrior : public Character
         float m_AttackTime;
 
         Collider *m_Collider;
-        Animation *m_Animation;
+        SpriteAnimation *m_Animation;
         RigidBody *m_RigidBody;
         Vector2D m_LastSafePosition;
 };
