@@ -8,5 +8,43 @@
     <texture id="player_attack" source="assets/Attack.png"/>
 
     <texture id="bg" source="assets/images/bg.png"/>
+
+        <texture id="boss_idle1" source="assets/boss/idle/idle_1.png"/>
+    <texture id="boss_idle2" source="assets/boss/idle/idle_2.png"/>
+    <texture id="boss_idle3" source="assets/boss/idle/idle_3.png"/>
+    <texture id="boss_idle4" source="assets/boss/idle/idle_4.png"/>
+    <texture id="boss_idle5" source="assets/boss/idle/idle_5.png"/>
+    <texture id="boss_idle6" source="assets/boss/idle/idle_6.png"/>
+
+    <texture id="boss_attack1" source="assets/boss/attack/hit_1.png"/>
+    <texture id="boss_attack2" source="assets/boss/attack/hit_2.png"/>
+    <texture id="boss_attack3" source="assets/boss/attack/hit_3.png"/>
+    <texture id="boss_attack4" source="assets/boss/attack/hit_4.png"/>
+    <texture id="boss_attack5" source="assets/boss/attack/hit_5.png"/>
+    <texture id="boss_attack6" source="assets/boss/attack/hit_6.png"/>
+
+    <texture id="boss_appear1" source="assets/boss/appear/appear_1.png"/>
+    <texture id="boss_appear2" source="assets/boss/appear/appear_2.png"/>
+    <texture id="boss_appear3" source="assets/boss/appear/appear_3.png"/>
+    <texture id="boss_appear4" source="assets/boss/appear/appear_4.png"/>
+    <texture id="boss_appear5" source="assets/boss/appear/appear_5.png"/>
+    <texture id="boss_appear6" source="assets/boss/appear/appear_6.png"/>
+    <texture id="boss_appear7" source="assets/boss/appear/appear_7.png"/>
+    <texture id="boss_appear8" source="assets/boss/appear/appear_8.png"/>
+    <texture id="boss_appear9" source="assets/boss/appear/appear_9.png"/>
+    <texture id="boss_appear10" source="assets/boss/appear/appear_10.png"/>
+    <texture id="boss_appear11" source="assets/boss/appear/appear_11.png"/>
+    <texture id="boss_appear12" source="assets/boss/appear/appear_12.png"/>
+    <texture id="boss_appear13" source="assets/boss/appear/appear_13.png"/>
+    <texture id="boss_appear14" source="assets/boss/appear/appear_14.png"/>
+    <texture id="boss_appear15" source="assets/boss/appear/appear_15.png"/>
+
+    <texture id="boss_die1" source="assets/boss/die/die_1.png"/>
+    <texture id="boss_die2" source="assets/boss/die/die_2.png"/>
+    <texture id="boss_die3" source="assets/boss/die/die_3.png"/>
+    <texture id="boss_die4" source="assets/boss/die/die_4.png"/>
+    <texture id="boss_die5" source="assets/boss/die/die_5.png"/>
+    <texture id="boss_die6" source="assets/boss/die/die_6.png"/>
+    <texture id="boss_die7" source="assets/boss/die/die_7.png"/>
     
 </textures>
