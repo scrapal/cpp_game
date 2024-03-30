@@ -37,8 +37,10 @@ void SeqAnimation::Parse(std::string source)
 {
     TiXmlDocument xml;
     xml.LoadFile(source);
-    if(xml.Error())
+    if(xml.Error()) {
         std::cout << "Failed to load animation file: " << source << std::endl;
+        throw std::string("Failed to load animation file: ") + source;
+    }
 
     TiXmlElement *root = xml.RootElement();
     for (TiXmlElement *e = root->FirstChildElement(); e != nullptr; e=e->NextSiblingElement())

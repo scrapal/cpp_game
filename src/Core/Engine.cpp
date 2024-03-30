@@ -3,6 +3,7 @@
 #include "Inputs/Input.h"
 #include <iostream>
 
+#include "Characters/Enemy.h"
 #include "Characters/Warrior.h"
 #include "SDL.h"
 #include "Timer/Timer.h"
@@ -10,7 +11,6 @@
 #include "Camera/Camera.h"
 
 Engine *Engine::s_Instance = nullptr;
-Warrior *player = nullptr;
 
 bool Engine::Init ()
 {
@@ -43,16 +43,10 @@ bool Engine::Init ()
     m_LevelMap = MapParser::GetInstance()->GetMap("MAP");
     TextureManager::GetInstance()->ParseTextures("assets/textures.tml");
 
-    /*TextureManager::GetInstance()->Load("player_idle", "assets/Idle.png");
-    TextureManager::GetInstance()->Load("player_run", "assets/Run.png");
-    TextureManager::GetInstance()->Load("player_jump", "assets/Jump.png");
-    TextureManager::GetInstance()->Load("player_fall", "assets/Fall.png");
-    TextureManager::GetInstance()->Load("player_crouch", "assets/Crouch.png");
-    TextureManager::GetInstance()->Load("player_attack", "assets/Attack.png");
-
-    TextureManager::GetInstance()->Load("bg", "assets/images/bg.png");*/
-
-    player = new Warrior(new Properties("player", 100, 200, 136, 96));
+    Warrior* player = new Warrior(new Properties("player", 100, 200, 136, 96));
+    Enemy* boss = new Enemy(new Properties("boss_idle", 820, 240, 460, 352));
+    m_GameObjects.push_back(player);
+    m_GameObjects.push_back(boss);
 
     Camera::GetInstance()->SetTarget(player->GetOrigin());
     return m_IsRunning = true;
@@ -61,7 +55,9 @@ bool Engine::Init ()
 void Engine::Update()
 {
     float dt = Timer::GetInstance()->GetDeltaTime();
-    player->Update(dt);
+    for (unsigned int i = 0; i != m_GameObjects.size(); i++)
+        m_GameObjects[i]->Update(dt);
+    
     m_LevelMap->Update();
     Camera::GetInstance()->Update(dt);
 }
@@ -73,7 +69,10 @@ void Engine::Render()
 
     TextureManager::GetInstance()->Draw("bg", 0, 0, 2100, 1050, 1, 1, 0.4);
     m_LevelMap->Render();
-    player->Draw();
+
+    for (unsigned int i = 0; i != m_GameObjects.size(); i++)
+        m_GameObjects[i]->Draw();
+
     SDL_RenderPresent(m_Renderer);
 }
 
@@ -83,7 +82,10 @@ void Engine::Events ()
 }
 
 bool Engine::Clean ()
-{
+{   
+    for (unsigned int i = 0; i != m_GameObjects.size(); i++)
+        m_GameObjects[i]->Clean();
+    
     TextureManager::GetInstance()->Clean();
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
