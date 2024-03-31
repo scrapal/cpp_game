@@ -2,7 +2,10 @@
 #include "Camera/Camera.h"
 #include "Collision/CollisionHandler.h"
 #include "Graphics/TextureManager.h"
+#include "Factory/ObjectFactory.h"
 #include <iostream>
+
+static Registrar<Enemy> registrar("BOSS");
 
 Enemy::Enemy(Properties* props): Character(props){
     m_RigidBody = new RigidBody();
@@ -19,7 +22,7 @@ void Enemy::Draw(){
     m_Animation->DrawFrame(m_Transform->X, m_Transform->Y, 0.3f, 0.3f, m_Flip);
 }
 
-void Enemy::Update(float dt){
+void Enemy::Update(float dt){ 
 
     // X-Axis movements
     m_RigidBody->Update(dt);
@@ -42,8 +45,8 @@ void Enemy::Update(float dt){
     m_Animation->Update(dt);
 
     if(m_Animation->IsEnded()){
-        m_Animation->SetCurrentSeq("boss_die");
-        m_Animation->SetRepeat(false);
+        m_Animation->SetCurrentSeq("boss_idle");
+        m_Animation->SetRepeat(true);
     }
 }
 
